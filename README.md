@@ -1,1 +1,2 @@
 # ADVANCED-ENCRYPTION-TOOL
+DESCRIPTION:This project is a basic file encryption and decryption tool developed in Python using the cryptography library with AES-256 encryption. It allows users to securely encrypt any file and decrypt it later using a saved encryption key. The tool includes three main functions: key generation, file encryption, and file decryption. It is beginner-friendly, runs smoothly in Google Colab, and is stored in a GitHub repository as part of the CODTECH Cybersecurity Internship submission.
