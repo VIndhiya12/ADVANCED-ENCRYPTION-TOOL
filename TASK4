@@ -1,0 +1,48 @@
+!pip install cryptography
+
+from cryptography.fernet import Fernet
+def generate_key():
+    key = Fernet.generate_key()
+    with open("secret.key", "wb") as f:
+        f.write(key)
+    print("Key generated and saved as secret.key")
+def load_key():
+    return open("secret.key", "rb").read()
+def encrypt_file(filename):
+    key = load_key()
+    fernet = Fernet(key)
+    with open(filename, "rb") as file:
+        data = file.read()
+    encrypted = fernet.encrypt(data)
+    with open(filename + ".enc", "wb") as file:
+        file.write(encrypted)
+    print("File encrypted successfully.")
+def decrypt_file(filename):
+    key = load_key()
+    fernet = Fernet(key)
+    with open(filename, "rb") as file:
+        data = file.read()
+    decrypted = fernet.decrypt(data)
+    new_name = filename.replace(".enc", ".dec")
+    with open(new_name, "wb") as file:
+        file.write(decrypted)
+    print("File decrypted successfully.")
+def main():
+    print("AES Encryption Tool")
+    print("1. Generate Key")
+    print("2. Encrypt File")
+    print("3. Decrypt File")
+    choice = input("Choose: ")
+
+    if choice == "1":
+        generate_key()
+    elif choice == "2":
+        filename = input("Enter file name to encrypt: ")
+        encrypt_file(filename)
+    elif choice == "3":
+        filename = input("Enter file name to decrypt: ")
+        decrypt_file(filename)
+    else:
+        print("Invalid choice")
+
+main()
